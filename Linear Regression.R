@@ -48,3 +48,47 @@ function now outputs the regression coefficients for all the predictors'''
 
 lm.fit = lm(medv~lstat+age, data=Boston)
 summary(lm.fit)
+
+# The Boston data set contains 13 variables, and it would be cumbersome to have to type all of these in order to perform a regression using all of the predictors
+lm.fit = lm(medv~., data = Boston)
+summary(lm.fit)
+summary(lm.fit)$sigma  #gives us the RSE
+summary(lm.fit)$r.sq # gives us R squared
+
+#What if we would like to perform a regression using all of the variables but one?
+lm.fit1 = lm(medv~.-age, data=Boston)
+summary(lm.fit1)
+# Alternatively, the update() function can be used
+lm.fit1=update(lm.fit, ~.-age)
+# Interaction Terms
+'''It is easy to include interaction terms in a linear model using the lm() function. The syntax 
+lstat:black tells R to include an interaction term between lstat and black. The syntax lstat*age
+simultaneously includes lstat, age, and the interaction term lstatxage as predictors'
+summary(lm(medv~lstat*age, data = Boston))
+# Non-linear Transformations of the Predictors
+lm.fit2 = lm(medv~lstat+I(lstat^2))
+summary(lm.fit2)
+'''The near-zero -value associated with the quadratic term suggests that it leads to an imporoved model.
+We use the anova() function to further quantify the extent to which the quadratic fit is superior to the linear fit'
+
+lm.fit = lm(medv~ lstat)
+anova(lmv=lm.fit, lm.fit2)
+par(mfrow=c(2,2))
+plot(lm.fit2)
+lm.fit5 = lm(medv~poly(lstat,5))
+summary(lm.fit5)
+summary(lm(medv~log(rm),data=Boston))
+
+# Qualitative Predictors
+
+fix(Carseats)
+names(Carseats)
+lm.fit = lm(Sales~.+Income:Advertising+Price:Age, data=Carseats)
+summary(lm.fit)
+'The contrasts() function returns the coding that R uses for the dummy variables.
+attach(Carseats)
+contrasts(ShelveLoc)
+
+# Writing Functions
+
+LoadLibraries()
