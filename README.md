@@ -1,1 +1,4 @@
 # An_Introduction_to_Statistical_Learning-with_Applications_in_R
+Linear Regression
+
+Logistic Regression
